@@ -59,7 +59,7 @@ const MapContainer = () => {
   return (
     <Container>
       <LoadScript
-        googleMapsApiKey="AIzaSyCXnzQAnmOBMz7eu9J4ZJvds4y3f650zAM"
+        googleMapsApiKey="apikey here"
       >
         <GoogleMap
           onClick={(e) => {
