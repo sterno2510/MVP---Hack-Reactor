@@ -24,7 +24,6 @@ const MapContainer = () => {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-
       console.log('Latitude is :', position.coords.latitude);
       console.log('Longitude is :', position.coords.longitude);
       setLocation({ lat: position.coords.latitude, lng: position.coords.longitude });
@@ -42,13 +41,12 @@ const MapContainer = () => {
   };
 
   const getForecastLocation = (forecastLocation) => {
-
-    axios.get(`https://api.weather.gov/points/${forecastLocation.lat},${forecastLocation.lng}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${forecastLocation.lat}&lon=${forecastLocation.lng}&appid=42e3c3bb583132fc4268b0cb4bb4872f`)
       .then((data) => {
-        console.log('FIRST', data.data.properties)
+        console.log('FIRST', data.data.properties);
         axios.get(`${data.data.properties.forecast}`)
           .then((data) => {
-            console.log('SECOND AXIOS CALL', data.data)
+            console.log('SECOND AXIOS CALL', data.data);
             setForecast(data.data.properties.periods);
           })
           .catch((err) => {
