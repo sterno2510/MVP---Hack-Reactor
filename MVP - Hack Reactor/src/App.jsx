@@ -8,17 +8,27 @@ import Forecast from './Forecast';
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto;
 `;
 
-const App = () => (
-  <>
-    <h1>Instant Weather Forecast</h1>
-    <Container>
-      <MapContainer />
-      <Forecast />
-    </Container>
-  </>
-);
+const App = () => {
+  const [forecast, setForecast] = useState([]);
+  const [forecastSet, setForecastSet] = useState(false);
+
+  return (
+    <>
+      <h1>Instant Weather Forecast</h1>
+      <Container>
+        <MapContainer
+          forecast={forecast}
+          setForecast={setForecast}
+          setForecastSet={setForecastSet}
+        />
+        { forecastSet
+        && <Forecast forecast={forecast} />}
+      </Container>
+    </>
+  );
+};
 
 export default App;

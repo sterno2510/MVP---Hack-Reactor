@@ -13,11 +13,10 @@ const Container = styled.div`
   height: 60vh;
 `;
 
-const MapContainer = () => {
+const MapContainer = ({ forecast, setForecast, setForecastSet }) => {
   const [location, setLocation] = useState({
     lat: 40.73750794499213, lng: -73.9957940167796,
   });
-  const [forecast, setForecast] = useState([]);
 
   console.log(forecast);
   console.log('location', location);
@@ -41,17 +40,10 @@ const MapContainer = () => {
   };
 
   const getForecastLocation = (forecastLocation) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${forecastLocation.lat}&lon=${forecastLocation.lng}&appid=42e3c3bb583132fc4268b0cb4bb4872f`)
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${forecastLocation.lat}&lon=${forecastLocation.lng}&units=imperial&appid=${import.meta.env.VITE_OPENWEATHER_API_KEY}`)
       .then((data) => {
-        console.log('FIRST', data.data.properties);
-        axios.get(`${data.data.properties.forecast}`)
-          .then((data) => {
-            console.log('SECOND AXIOS CALL', data.data);
-            setForecast(data.data.properties.periods);
-          })
-          .catch((err) => {
-            console.log('Error with second Axios Request', err);
-          });
+        setForecast(data.data);
+        setForecastSet(true);
       })
       .catch((err) => {
         console.log('Error with first Axios Request', err);
