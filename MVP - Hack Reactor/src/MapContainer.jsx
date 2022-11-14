@@ -13,11 +13,10 @@ const Container = styled.div`
   height: 60vh;
 `;
 
-const MapContainer = () => {
+const MapContainer = ({ forecast, setForecast, setForecastSet }) => {
   const [location, setLocation] = useState({
     lat: 40.73750794499213, lng: -73.9957940167796,
   });
-  const [forecast, setForecast] = useState([]);
 
   console.log(forecast);
   console.log('location', location);
@@ -41,6 +40,7 @@ const MapContainer = () => {
   };
 
   const getForecastLocation = (forecastLocation) => {
+<<<<<<< HEAD
     axios.get(`https://api.weather.gov/points/${forecastLocation.lat},${forecastLocation.lng}`)
       .then((data) => {
         console.log('FIRST', data.data.properties);
@@ -52,6 +52,12 @@ const MapContainer = () => {
           .catch((err) => {
             console.log('Error with second Axios Request', err);
           });
+=======
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast?lat=${forecastLocation.lat}&lon=${forecastLocation.lng}&units=imperial&appid=${import.meta.env.VITE_OPENWEATHER_API_KEY}`)
+      .then((data) => {
+        setForecast(data.data);
+        setForecastSet(true);
+>>>>>>> d48b2d3c7fb16e0f46bb5e1e755e6b2a75d8d9bd
       })
       .catch((err) => {
         console.log('Error with first Axios Request', err);
