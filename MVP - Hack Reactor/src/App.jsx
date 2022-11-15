@@ -1,7 +1,6 @@
 /* eslint-disable react/function-component-definition */
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
-import reactLogo from './assets/react.svg';
 import './App.css';
 import MapContainer from './MapContainer';
 import Forecast from './Forecast';
