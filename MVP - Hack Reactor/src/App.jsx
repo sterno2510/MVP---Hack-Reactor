@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components';
 import './App.css';
 import MapContainer from './MapContainer';
 import Forecast from './Forecast';
+import NavBar from './NavBar';
+import ButtonAppBar from './NewNavBar';
 
 const Container = styled.div`
   display: grid;
@@ -16,7 +18,8 @@ const App = () => {
 
   return (
     <>
-      <h1>Instant Weather Forecast</h1>
+      <ButtonAppBar />
+      {/* <NavBar /> */}
       <Container>
         <MapContainer
           forecast={forecast}
