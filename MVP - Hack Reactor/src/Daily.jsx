@@ -2,6 +2,27 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { parseISO, format } from 'date-fns';
+import sunny from './assets/mostlysunny.png';
+import fair from './assets/fairskies.png';
+import mostlysunny from './assets/mostlysunny.png';
+import partlysunny from './assets/partlysunny.png';
+import mostlycloudy from './assets/mostlycloudy.png';
+import overcast from './assets/overcast.png';
+
+const skyImages = {
+  0: sunny,
+  10: fair,
+  20: mostlysunny,
+  30: partlysunny,
+  40: partlysunny,
+  50: partlysunny,
+  60: partlysunny,
+  70: mostlycloudy,
+  80: mostlycloudy,
+  90: overcast,
+  100: overcast,
+
+};
 
 const cloudConditions = {
   0: 'Sunny/Clear',
@@ -21,47 +42,57 @@ const Container = styled.div`
    display: flex;
 `;
 
+const CarouselImage = styled.img`
+height: 200px;
+`;
+
+const TextDiv = styled.div`
+font-size: 22px;
+padding-bottom: 10px;
+`;
+
 const Daily = ({ day }) => (
   <>
-    <div>{`Valid for ${format(new Date(day.dt * 1000), 'EEEE MMMM do, h:mm a')}`}</div>
-    <div>{`Cloud Cover: ${cloudConditions[Math.floor(day.clouds.all / 10) * 10]}`}</div>
-    <div>{`Forecast Temp: ${Math.round(day.main.temp)}F`}</div>
-    <div>{`Humidity ${day.main.humidity}%`}</div>
+    <div style={{fontSize: "28px", paddingBottom: "10px"}}>{`Valid for ${format(new Date(day.dt * 1000), 'EEEE MMMM do, h:mm a')}`}</div>
+    <CarouselImage src={skyImages[Math.floor(day.clouds.all / 10) * 10]} />
+    <TextDiv>{`Cloud Cover: ${cloudConditions[Math.floor(day.clouds.all / 10) * 10]}`}</TextDiv>
+    <TextDiv>{`Forecast Temp: ${Math.round(day.main.temp)}F`}</TextDiv>
+    <TextDiv>{`Humidity ${day.main.humidity}%`}</TextDiv>
     { day.wind.deg >= 0 && day.wind.deg < 11.25
-      && <div>{`Winds from the North @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the North @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 11.25 && day.wind.deg < 33.75
-      && <div>{`Winds from the North-Northeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the North-Northeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 33.75 && day.wind.deg < 56.25
-      && <div>{`Winds from the Northeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the Northeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 56.25 && day.wind.deg < 78.75
-      && <div>{`Winds from the East-Northeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the East-Northeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 78.75 && day.wind.deg < 101.25
-      && <div>{`Winds from the East @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the East @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 101.25 && day.wind.deg < 123.75
-      && <div>{`Winds from the East-Southeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the East-Southeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 123.75 && day.wind.deg < 146.25
-      && <div>{`Winds from the Southeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the Southeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 146.25 && day.wind.deg < 168.75
-      && <div>{`Winds from the South-Southeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the South-Southeast @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 168.75 && day.wind.deg < 191.25
-      && <div>{`Winds from the South @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the South @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 191.25 && day.wind.deg < 213.75
-      && <div>{`Winds from the South-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the South-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 213.75 && day.wind.deg < 236.25
-      && <div>{`Winds from the Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 236.25 && day.wind.deg < 258.75
-      && <div>{`Winds from the West-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the West-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 258.75 && day.wind.deg < 281.25
-      && <div>{`Winds from the West-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the West-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 281.25 && day.wind.deg < 303.75
-      && <div>{`Winds from the West-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the West-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 303.75 && day.wind.deg < 326.25
-      && <div>{`Winds from the West-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the West-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 326.25 && day.wind.deg < 348.75
-      && <div>{`Winds from the West-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
+      && <TextDiv>{`Winds from the West-Southwest @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     { day.wind.deg >= 348.75 && day.wind.deg <= 360
-      && <div>{`Winds from the North @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</div>}
-    <div>{`Chance of Precipitation: ${day.pop * 100}%`}</div>
+      && <TextDiv>{`Winds from the North @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
+    <TextDiv>{`Chance of Precipitation: ${day.pop * 100}%`}</TextDiv>
   </>
 );
 

@@ -10,7 +10,7 @@ const defaultCenter = {
 
 const Container = styled.div`
   width: 100%;
-  height: 60vh;
+  height: 45vh;
 `;
 
 const MapContainer = ({ forecast, setForecast, setForecastSet }) => {

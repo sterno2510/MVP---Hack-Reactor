@@ -11,7 +11,7 @@ import axios from 'axios';
 const ProfilePicture = styled.img`
   margin: 5px;
   padding-right: 5px;
-  
+
 `;
 
 export default function ButtonAppBar() {
@@ -29,13 +29,10 @@ export default function ButtonAppBar() {
   });
 
   useEffect(() => {
-    console.log('entered use effect on load')
     if (user) {
-      console.log('entered if user')
       axios.get('http://localhost:3000/update', { params: { email: user.email } })
         .then((data) => {
           const tempcount = data.data.visitCount;
-          console.log(tempcount);
           setCount(tempcount);
         })
         .catch((err) => {
