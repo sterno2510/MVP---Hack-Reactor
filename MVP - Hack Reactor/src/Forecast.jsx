@@ -12,12 +12,12 @@ const DailyContainer = styled.div`
 
 const Forecast = ({ forecast }) => (
   <div>
-    <h2>{`${forecast.city.name}`}</h2>
-    <DailyContainer>
+    <p style={{fontSize:"40px"}}>{`${forecast.city.name}`}</p>
+    <DailyContainer className="wrapper">
       <Carousel>
-        {forecast.list.map((day) => (
-          <Daily key={day.dt} day={day} />
-        ))}
+          {forecast.list.map((day) => (
+            <Daily key={day.dt} day={day} />
+          ))}
       </Carousel>
     </DailyContainer>
   </div>

@@ -11,22 +11,29 @@ import axios from 'axios';
 const ProfilePicture = styled.img`
   margin: 5px;
   padding-right: 5px;
+  border-radius: 50%;
 
 `;
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({
+  user,
+  isAuthenticated,
+  loginWithRedirect,
+  logoutWithRedirect,
+  logout,}
+) {
   const [count, setCount] = useState(0);
+  console.log(user)
+  // const {
+  //   user,
+  //   isAuthenticated,
+  //   loginWithRedirect,
+  //   logout,
+  // } = useAuth0();
 
-  const {
-    user,
-    isAuthenticated,
-    loginWithRedirect,
-    logout,
-  } = useAuth0();
-
-  const logoutWithRedirect = () => logout({
-    returnTo: window.location.origin,
-  });
+  // const logoutWithRedirect = () => logout({
+  //   returnTo: window.location.origin,
+  // });
 
   useEffect(() => {
     if (user) {
@@ -60,6 +67,8 @@ export default function ButtonAppBar() {
           )}
           {!isAuthenticated && (
           <Button
+            style={{position:"absolute",
+            left: "40%"}}
             id="qsLoginBtn"
             color="inherit"
             block

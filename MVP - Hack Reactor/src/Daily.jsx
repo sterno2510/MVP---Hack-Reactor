@@ -2,7 +2,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { parseISO, format } from 'date-fns';
-import sunny from './assets/mostlysunny.png';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import fair from './assets/fairskies.png';
 import mostlysunny from './assets/mostlysunny.png';
 import partlysunny from './assets/partlysunny.png';
@@ -10,7 +15,7 @@ import mostlycloudy from './assets/mostlycloudy.png';
 import overcast from './assets/overcast.png';
 
 const skyImages = {
-  0: sunny,
+  0: mostlysunny,
   10: fair,
   20: mostlysunny,
   30: partlysunny,
@@ -44,6 +49,7 @@ const Container = styled.div`
 
 const CarouselImage = styled.img`
 height: 200px;
+border-radius: 10px;
 `;
 
 const TextDiv = styled.div`
@@ -52,8 +58,8 @@ padding-bottom: 10px;
 `;
 
 const Daily = ({ day }) => (
-  <>
-    <div style={{fontSize: "28px", paddingBottom: "10px"}}>{`Valid for ${format(new Date(day.dt * 1000), 'EEEE MMMM do, h:mm a')}`}</div>
+  <Card sx={{ padding: 2 }}>
+    <div style={{ fontSize: '28px', paddingBottom: '10px' }}>{`Valid for ${format(new Date(day.dt * 1000), 'EEEE MMMM do, h:mm a')}`}</div>
     <CarouselImage src={skyImages[Math.floor(day.clouds.all / 10) * 10]} />
     <TextDiv>{`Cloud Cover: ${cloudConditions[Math.floor(day.clouds.all / 10) * 10]}`}</TextDiv>
     <TextDiv>{`Forecast Temp: ${Math.round(day.main.temp)}F`}</TextDiv>
@@ -93,7 +99,7 @@ const Daily = ({ day }) => (
     { day.wind.deg >= 348.75 && day.wind.deg <= 360
       && <TextDiv>{`Winds from the North @ ${Math.round(day.wind.speed)}MPH with gusts to ${Math.round(day.wind.gust)}`}</TextDiv>}
     <TextDiv>{`Chance of Precipitation: ${day.pop * 100}%`}</TextDiv>
-  </>
+  </Card>
 );
 
 export default Daily;
