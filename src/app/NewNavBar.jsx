@@ -26,7 +26,7 @@ export default function ButtonAppBar({
 
   useEffect(() => {
     if (user) {
-      axios.get('http://localhost:3000/update', { params: { email: user.email } })
+      axios.get('https://localhost:3001/update', { params: { email: user.email } })
         .then((data) => {
           const tempcount = data.data.visitCount;
           setCount(tempcount);

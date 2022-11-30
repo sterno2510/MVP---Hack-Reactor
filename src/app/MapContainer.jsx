@@ -36,7 +36,7 @@ const MapContainer = ({ forecast, setForecast, setForecastSet }) => {
   };
 
   const getForecastLocation = (forecastLocation) => {
-    axios.get('http://localhost:3000/weather', { params: { lat: forecastLocation.lat, lng: forecastLocation.lng } })
+    axios.get('https://localhost:3001/weather', { params: { lat: forecastLocation.lat, lng: forecastLocation.lng } })
       .then((data) => {
         console.log(data)
         setForecast(data.data);
